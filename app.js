@@ -1,17 +1,13 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
+const formRoute = require("./routes/form");
 
-app.post("/submit", (req, res, next) =>{
-    res.send(req.url + Test)
-});
-app.use("/",(req, res, next) =>{
-    res.send(`
-    <form action= "/submit" method="POST">
-    <input name = "data"/>
-    <button>Submit</button>
-    </form>
-    `);
-   
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.use("/form", formRoute);
+app.use("/", (req, res) => {
+    res.send("wel Express");
 });
 
 app.listen(3000);
